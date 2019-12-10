@@ -1,3 +1,6 @@
 node_modules
 
 .env
+
+# ES5 Folder
+build
