@@ -1,4 +1,6 @@
-import { check } from 'express-validator';
+import {
+  check
+} from 'express-validator';
 
 const emailCheck = check('email')
   .exists()
@@ -33,26 +35,50 @@ const lastNameCheck = check('lastName')
 const jobRoleCheck = check('jobRole')
   .exists()
   .withMessage('Job Role field is missing')
+  .trim()
+  .withMessage('Job Role cannot be empty')
   .isString()
   .withMessage('Job Role must be an alphabet')
+  .isLength({
+    min: 2
+  })
+  .withMessage('Job Role needs a minimum of 2 characters')
 
 const departmentCheck = check('department')
   .exists()
   .withMessage('Department field is missing')
+  .trim()
+  .withMessage('Department cannot be empty')
   .isString()
   .withMessage('Department must be an alphabet')
+  .isLength({
+    min: 2
+  })
+  .withMessage('Department needs a minimum of 2 characters')
 
 const addressCheck = check('address')
   .exists()
-  .withMessage('Please type in your address')
+  .withMessage('Address field is missing')
+  .trim()
+  .withMessage('Address cannot be empty')
   .isString()
   .withMessage('Address must be a string')
+  .isLength({
+    min: 10
+  })
+  .withMessage('Address needs a minimum of 10 characters')
 
 const genderCheck = check('gender')
   .exists()
-  .withMessage('Please select your gender')
+  .withMessage('Gender field is missing')
+  .trim()
+  .withMessage('Gender cannot be empty')
   .isString()
   .withMessage('Gender must be a string')
+  .isLength({
+    min: 4
+  })
+  .withMessage('Gender needs a minimum of 4 characters')
 
 const passwordCheck = check('password').exists()
   .withMessage('Password Field is missing')
@@ -79,5 +105,13 @@ const confirmPasswordCheck = check('confirmPassword')
   });
 
 export {
-  emailCheck, firstNameCheck, lastNameCheck, genderCheck, jobRoleCheck, departmentCheck, addressCheck, passwordCheck, confirmPasswordCheck 
+  emailCheck,
+  firstNameCheck,
+  lastNameCheck,
+  genderCheck,
+  jobRoleCheck,
+  departmentCheck,
+  addressCheck,
+  passwordCheck,
+  confirmPasswordCheck
 };
