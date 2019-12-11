@@ -1,12 +1,12 @@
 import { check } from 'express-validator';
 
-exports.emailCheck = check('email')
+const emailCheck = check('email')
   .exists()
   .withMessage('Email Field is missing')
   .isEmail()
   .withMessage('Invalid Email Format: abcd@efg.xxx')
 
-exports.firstnameCheck = check('firstname')
+const firstnameCheck = check('firstname')
   .exists()
   .withMessage('Firstname field is missing')
   .isLength({
@@ -18,7 +18,7 @@ exports.firstnameCheck = check('firstname')
   .isAlpha()
   .withMessage('Firstname field cannot be blank')
 
-exports.lastnameCheck = check('lastname')
+const lastnameCheck = check('lastname')
   .exists()
   .withMessage('Lastname field is missing')
   .isLength({
@@ -30,29 +30,29 @@ exports.lastnameCheck = check('lastname')
   .isAlpha()
   .withMessage('Lastname field cannot be blank')
 
-exports.jobRoleCheck = check('jobRole')
+const jobRoleCheck = check('jobRole')
   .exists()
   .withMessage('Job Role field is missing')
   .isString()
   .withMessage('Job role must be an alphabet')
 
-exports.departmentCheck = check('department')
+const departmentCheck = check('department')
   .exists()
   .withMessage('Department field is missing')
 
-exports.addressCheck = check('address')
+const addressCheck = check('address')
   .exists()
   .withMessage('Please type in your address')
   .isAlphanumeric()
   .withMessage('Address can contain numbers and alphabets')
 
-exports.genderCheck = check('gender')
+const genderCheck = check('gender')
   .exists()
   .withMessage('Please select your gender')
   .isString()
   .withMessage('Gender must be an alphabet')
 
-exports.passwordCheck = check('password').exists()
+const passwordCheck = check('password').exists()
   .withMessage('Password Field is missing')
   .isLength({
     min: 8,
@@ -66,7 +66,7 @@ exports.passwordCheck = check('password').exists()
   .isAlpha()
   .withMessage('Password Field must contain at least one alphabet')
 
-exports.confirmPasswordCheck = check('confirmPassword')
+const confirmPasswordCheck = check('confirmPassword')
   .custom((value, {
     req
   }) => {
@@ -75,3 +75,7 @@ exports.confirmPasswordCheck = check('confirmPassword')
     }
     return true;
   });
+
+export {
+  emailCheck, firstnameCheck, lastnameCheck, genderCheck, jobRoleCheck, departmentCheck, addressCheck, passwordCheck, confirmPasswordCheck 
+};

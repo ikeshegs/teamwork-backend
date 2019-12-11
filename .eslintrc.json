@@ -1,14 +1,18 @@
 {
-  "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier"],
-  "parserOptions": {
-      "ecmaVersion": 6
-  },
-  "env": {
-      "es6": true
-  },
-  "rules": {
-      "no-unused-vars": "warn",
-      "no-var": "error"
-  }
+    "parser": "babel-eslint",
+    "extends": ["airbnb", "prettier"],
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "env": {
+        "es6": true
+    },
+    "rules": {
+        "no-unused-vars": "warn",
+        "no-var": "error",
+        "prettier/prettier": "warn",
+        "camelcase": "error",
+        "object-curly-newline": "warn",
+        "object-curly-spacing": "warn"
+    }
 }

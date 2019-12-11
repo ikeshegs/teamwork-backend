@@ -1,11 +1,12 @@
 import express from 'express';
 import 'regenerator-runtime/runtime';
 import 'core-js';
+import 'babel-polyfill';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 
 // Routes
-
+import userRoute from './routes/user';
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use(userRoute);
+
 app.get('/', (req, res) => {
   return res
     .status(200)
@@ -23,6 +26,6 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);
-console.log('App is running on port', PORT);
+console.log('Teamwork is running on port', PORT);
 
 export default app;
