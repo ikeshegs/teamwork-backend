@@ -2,8 +2,8 @@ import express from 'express';
 
 import {
   emailCheck,
-  firstnameCheck,
-  lastnameCheck,
+  firstNameCheck,
+  lastNameCheck,
   passwordCheck,
   jobRoleCheck,
   genderCheck,
@@ -15,8 +15,12 @@ import {
 // Controllers
 import User from '../controller/user';
 
-const user = express.Router();
+const userRoute = express.Router();
 
-user.post('api/v1/auth/create-user', [emailCheck, firstnameCheck, lastnameCheck, passwordCheck, confirmPasswordCheck, jobRoleCheck, departmentCheck, genderCheck, addressCheck], User.createUser)
+userRoute.post(
+  '/api/v1/auth/create-user', 
+  [emailCheck, firstNameCheck, lastNameCheck, passwordCheck, confirmPasswordCheck, jobRoleCheck, departmentCheck, genderCheck, addressCheck], 
+  User.createUser
+);
 
-export default user;
+export default userRoute;

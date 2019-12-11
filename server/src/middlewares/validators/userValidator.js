@@ -6,7 +6,7 @@ const emailCheck = check('email')
   .isEmail()
   .withMessage('Invalid Email Format: abcd@efg.xxx')
 
-const firstnameCheck = check('firstname')
+const firstNameCheck = check('firstName')
   .exists()
   .withMessage('Firstname field is missing')
   .isLength({
@@ -18,7 +18,7 @@ const firstnameCheck = check('firstname')
   .isAlpha()
   .withMessage('Firstname field cannot be blank')
 
-const lastnameCheck = check('lastname')
+const lastNameCheck = check('lastName')
   .exists()
   .withMessage('Lastname field is missing')
   .isLength({
@@ -34,23 +34,25 @@ const jobRoleCheck = check('jobRole')
   .exists()
   .withMessage('Job Role field is missing')
   .isString()
-  .withMessage('Job role must be an alphabet')
+  .withMessage('Job Role must be an alphabet')
 
 const departmentCheck = check('department')
   .exists()
   .withMessage('Department field is missing')
+  .isString()
+  .withMessage('Department must be an alphabet')
 
 const addressCheck = check('address')
   .exists()
   .withMessage('Please type in your address')
-  .isAlphanumeric()
-  .withMessage('Address can contain numbers and alphabets')
+  .isString()
+  .withMessage('Address must be a string')
 
 const genderCheck = check('gender')
   .exists()
   .withMessage('Please select your gender')
   .isString()
-  .withMessage('Gender must be an alphabet')
+  .withMessage('Gender must be a string')
 
 const passwordCheck = check('password').exists()
   .withMessage('Password Field is missing')
@@ -77,5 +79,5 @@ const confirmPasswordCheck = check('confirmPassword')
   });
 
 export {
-  emailCheck, firstnameCheck, lastnameCheck, genderCheck, jobRoleCheck, departmentCheck, addressCheck, passwordCheck, confirmPasswordCheck 
+  emailCheck, firstNameCheck, lastNameCheck, genderCheck, jobRoleCheck, departmentCheck, addressCheck, passwordCheck, confirmPasswordCheck 
 };
