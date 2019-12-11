@@ -9,7 +9,7 @@ import customValidator from '../middlewares/validators/validatorErrors';
 const salt = bcrypt.genSaltSync(12);
 
 const User = {
-  
+
   /**
    * Create A User
    * @param {object} req 
@@ -21,20 +21,30 @@ const User = {
     const validator = customValidator(req);
 
     if (validator.error) {
-      return res.status(404).json({ status: 404, error: validator.error });
+      return res.status(404).json({
+        status: 404,
+        error: validator.error
+      });
     }
 
     const {
-      email, firstName, lastName, address, gender, jobRole, department, password 
+      email,
+      firstName,
+      lastName,
+      address,
+      gender,
+      jobRole,
+      department,
+      password
     } = req.body;
-    
+
     const hash = bcrypt.hashSync(password, salt, (err, result) => {
       if (err) {
         return err;
       }
       return result;
     });
-    
+
     const text = `INSERT INTO
       users(id, email, first_name, last_name, password, gender, address, job_role, department, created_date, modified_date)
       VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
@@ -74,7 +84,7 @@ const User = {
           }
         });
       }
-    } catch(error) {
+    } catch (error) {
       if (error.routine === '_bt_check_unique') {
         res.status(409).json({
           status: 'unique error',
@@ -89,7 +99,70 @@ const User = {
           error: error.message
         })
       }
-      
+
+    }
+  },
+
+  /**
+   * Signin A User
+   * @param {object} req 
+   * @param {object} res
+   * @returns {object}
+   */
+
+  async signinUser(req, res) {
+    const validator = customValidator(req);
+
+    if (validator.error) {
+      return res.status(404).json({
+        status: 404,
+        error: validator.error
+      });
+    }
+
+    const {
+      email,
+      password
+    } = req.body;
+
+    const text = `SELECT id, email, password FROM users WHERE email = $1`;
+    const values = [email];
+
+    try {
+      const data = await db.query(text, values);
+      if (data) {
+
+        const comparedPassword = bcrypt.compareSync(
+          password,
+          data.rows[0].password
+        );
+
+        if (!comparedPassword) {
+          return res.status(401).json({
+            status: 'error',
+            message: 'Wrong Password'
+          })
+        }
+
+        const token = auth.createToken(data.rows[0]);
+        return res.status(200).json({
+          status: "success",
+          data: {
+            message: "Successful",
+            token,
+            userId: data.rows[0].id,
+            email: data.rows[0].email,
+            password: data.rows[0].password,
+          }
+        });
+      }
+    } catch (error) {
+      if (error) {
+        res.status(404).json({
+          status: 'error',
+          message: 'User Not Found'
+        })
+      }
     }
   }
 }

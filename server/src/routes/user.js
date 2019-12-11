@@ -23,4 +23,6 @@ userRoute.post(
   User.createUser
 );
 
+userRoute.post('/api/v1/auth/signin', [emailCheck, passwordCheck], User.signinUser)
+
 export default userRoute;
