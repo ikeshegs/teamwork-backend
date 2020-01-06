@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import db from '../database';
 import auth from '../utils/auth';
-import customValidator from '../middlewares/validators/validatorErrors';
+import customValidator from '../middlewares/validatorErrors';
 
 const salt = bcrypt.genSaltSync(12);
 
@@ -38,7 +38,7 @@ const User = {
       password
     } = req.body;
 
-    const hash = bcrypt.hashSync(password, salt, (err, result) => {
+    const hash = await bcrypt.hashSync(password, salt, (err, result) => {
       if (err) {
         return err;
       }
@@ -99,7 +99,6 @@ const User = {
           error: error.message
         })
       }
-
     }
   },
 

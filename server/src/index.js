@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 
 // Routes
 import userRoute from './routes/user';
+import gifRoute from './routes/gifs';
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(userRoute);
+app.use(gifRoute);
 
 app.get('/', (req, res) => {
   return res

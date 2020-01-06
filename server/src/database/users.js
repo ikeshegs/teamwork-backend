@@ -60,7 +60,7 @@ const dropUserTable = () => {
 }
 
 pool.on('remove', () => {
-  console.log('client removed');
+  console.log('User removed');
   process.exit(0);
 });
 
