@@ -139,7 +139,7 @@ const User = {
         if (!comparedPassword) {
           return res.status(401).json({
             status: 'error',
-            message: 'Wrong Password'
+            message: 'Invalid User Details'
           })
         }
 

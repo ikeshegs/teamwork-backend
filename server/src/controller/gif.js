@@ -1,7 +1,8 @@
 import multer from 'multer'
 
 import db from '../database';
-import customValidator from '../middlewares/validators/validatorErrors';
+import customValidator from '../middlewares/validatorErrors';
+
 import cloudinary from '../utils/cloudinaryConfig';
 
 const Gif = {

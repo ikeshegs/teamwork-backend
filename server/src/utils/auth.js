@@ -26,14 +26,21 @@ const verifyToken = (req, res, next) => {
     const token = bearer[1];
 
     jwt.verify(token, process.env.JWT_KEY, (err, result) => {
+      // if (err) {
+      //   res.status(403).json({
+      //     status: 'error',
+      //     error: 'Forbidden'
+      //   });
+      // } else {
+      //   req.user = result
+      // }
       if (err) {
-        res.status(403).json({
+        return res.status(403).json({
           status: 'error',
           error: 'Forbidden'
         });
-      } else {
-        req.user = result
-      }
+      } 
+      req.user = result
     })
     next();
   } else {
